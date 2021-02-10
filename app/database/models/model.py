@@ -14,7 +14,7 @@ class EgsAll(db.Model):
 
         for i in range(len(emp)):
             # print('_' + str(i+1))
-            setattr(self, '_' + str(i+1), emp[i])
+            setattr(self, '_' + str(i + 1), emp[i])
 
     __tablename__ = 'egs_all'
     mysql_row_format = 'DYNAMIC'
@@ -252,3 +252,15 @@ class Time(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     creat_time = db.Column(db.DateTime, nullable=False)
     _as = db.Column('as', db.String(255, 'utf8_general_ci'))
+
+
+class QueryBySql(db.Model):
+    __tablename__ = 'query_by_sql'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255, 'utf8_general_ci'), nullable=False)
+    sql = db.Column(db.Text(collation='utf8_general_ci'), nullable=False)
+    time_id = db.Column(db.ForeignKey('time.id', ondelete='RESTRICT', onupdate='RESTRICT'), nullable=False, index=True)
+    remarks = db.Column(db.String(255))
+
+    time = db.relationship('Time', primaryjoin='QueryBySql.time_id == Time.id', backref='query_by_sqls')

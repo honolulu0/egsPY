@@ -10,6 +10,7 @@ DEBUG = True
 
 SECRET_KEY = '!@#$%^&*()11'
 PERMANENT_SESSION_LIFETIME = 5  # 设置session过期时间
+JSON_SORT_KEYS = False
 
 DIALECT = 'mysql'
 DRIVER = 'pymysql'
